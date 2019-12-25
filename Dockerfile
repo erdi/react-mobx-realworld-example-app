@@ -1,12 +1,6 @@
-FROM node:lts-alpine as builder
+FROM node:lts-alpine
 WORKDIR /home/realworld/app
 COPY . /home/realworld/app
 RUN npm install
-RUN yarn build
-
-FROM node:lts-alpine
-WORKDIR /home/realworld/app
-COPY --from=0 /home/realworld/app/build/ .
-RUN yarn global add serve
-EXPOSE 5000
-ENTRYPOINT serve -s .
+EXPOSE 3000
+ENTRYPOINT npm start
